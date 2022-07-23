@@ -44,3 +44,11 @@ rotateCtrl.reset(duration, resetRad);
 rotateCtrl.reset(0, PI);
 rotateCtrl.reset(1000, 0);
 ```
+
+
+#### Todos
+- 模拟Apple Watch徽章松手后的***摆动->停止***的过渡效果
+- 完成`freezePage`函数：手指/鼠标控制目标元素转动时，禁止页面scrollY
+- 删除`playAmt`函数：第一个版本，能够实现小摆动，但是停住的时机不够精准；
+
+
