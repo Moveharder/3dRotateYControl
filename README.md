@@ -16,6 +16,12 @@
 ```
 import rotateCtrl from "3dRotateYControl";
 
+/**
+* RotateControl(targetDom, targetRadius);
+* targetDom 需要控制的元素
+* targetRadius 目标元素的半径（宽度的一半，影响手指或鼠标滑动元素时的敏感度），默认200px
+*/
+
 let targetDom = document.querySelector("#badge_stage");
 let rotateCtrl = new RotateControl(targetDom);
 let isTouching = false;
@@ -35,10 +41,10 @@ rotateCtrl.listen();
 #### Advance
 ```
 /**
+* rotateCtrl.reset(duration, resetRad);
 * duration 过渡时间ms，默认500
 * resetRad 制定重置的角度，默认0
 */
-rotateCtrl.reset(duration, resetRad);
 
 // 比如想在1000ms里，从PI开始重置到0，可以这么用！
 rotateCtrl.reset(0, PI);
