@@ -205,23 +205,25 @@ export class RotateControl {
   }
 
   /**
-   * 通过将面向用户的一面分成(0,PI/2]和[PI/2,PI),
+   * 通过将面向用户的一面分成(0,PI/2]，后退弧度！和[PI/2,PI)，前进弧度,
    * 计算出需要过渡的弧度值，调用frame方法逐帧过渡。
    */
   keepBalance() {
     let self = this;
-    let leftRad = self.rad % PI; //正、负
-    let absLefeRad = Math.abs(leftRad); //用于判断没转过90度的话，回到0，否则转到n倍的+，-PI
+    let leftRad = self.rad % PI; //正、负（用于判断回退x弧度，还是前进y弧度到水平位置）
+    let absLeftRad = Math.abs(leftRad); //用于判断没转过90度的话，回到0，否则转到n倍的+，-PI
 
     //确定保持平衡时的转动方向「顺时针or逆时针」
-    if (absLefeRad > 0 && absLefeRad < PI / 2) {
+    if (absLeftRad > 0 && absLeftRad < PI / 2) {
+      // 需要后退到起步点
       self.frame(leftRad, -1); //减少leftRad弧度值
-    } else if (absLefeRad >= PI / 2 && absLefeRad < PI) {
+    } else if (absLeftRad >= PI / 2 && absLeftRad < PI) {
+      // 需要前进到平衡点
       let addRad = 0;
       if (leftRad >= 0) {
-        addRad = PI - leftRad;
+        addRad = PI - leftRad; //逆时针旋转，弧度为正，只需增加（PI - leftRad）即可前进到n倍的PI
       } else {
-        addRad = absLefeRad - PI;
+        addRad = absLeftRad - PI; //顺时针旋转，弧度为负，只需再减少（absLeftRad - PI）即可前进到n倍的-PI
       }
       self.frame(addRad, 1); //增加addRad弧度值
     }
@@ -235,14 +237,14 @@ export class RotateControl {
    */
   frame(s, direction, duration = 300) {
     // test-直接到达结束的弧度
-    // this.rad = this.rad + s * direction;
+    // this.rad = this.rad + s * direction; //终点的弧度值
     // this.emit("update", { rad: this.rad, speed: this.speed });
     // return;
 
     // 缓动过度到结束的弧度
     let self = this;
     let v = s / duration;
-    let stepRad = direction * v * self.frameRate;
+    let stepRad = direction * v * self.frameRate; //每帧转动的弧度
     let balanceRadRange = [-Math.abs(stepRad), Math.abs(stepRad)]; //平衡误差范围
     let startRad = this.rad;
     let endRad = startRad + s * direction;
