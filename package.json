@@ -1,0 +1,19 @@
+{
+  "name": "3d.badge",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "3d-rotater-y": "^1.0.0",
+    "vue": "^3.2.25"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^2.3.3",
+    "three": "^0.141.0",
+    "vite": "^2.9.9"
+  }
+}
