@@ -51,7 +51,7 @@ let pX = -20;
 let loader = new GLTFLoader();
 loader.setMeshoptDecoder(MeshoptDecoder);
 loader.load(
-  "/models/w7_cc.glb",
+  "models/w7_cc.glb",
   (glb) => {
     keepW7BadgeMesh = glb.scene;
     keepW7BadgeMesh.scale.set(400, 400, 400);//keep-badge-size
@@ -72,7 +72,7 @@ loader.load(
 function addTextGeometry() {
   var loader = new FontLoader();
 
-  loader.load("/fonts/font.json", function (font) {
+  loader.load("fonts/font.json", function (font) {
     const color = 0xdaa520;
     const height = 1,
       size = 1,
