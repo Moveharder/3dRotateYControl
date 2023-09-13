@@ -6,7 +6,7 @@ const IS_BUILD = (process.env.NODE_ENV || "").includes("production")
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: IS_BUILD ? "/3dRotateYControl/docs/" : "/",
+  base: IS_BUILD ? "/3dRotateYControl/" : "/",
   plugins: [vue()],
   build: {
     minify: "terser",
